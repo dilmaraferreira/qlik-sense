@@ -1,0 +1,2 @@
+LET V_CONEXAO = 'DADOSADV (srv-kon02_desenv1)';
+LET V_PATH_QVD = 'QVD_Files (srv-kon02_desenv1)'

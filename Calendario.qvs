@@ -1,0 +1,16 @@
+[Cal]: 
+  DECLARE FIELD DEFINITION Tagged ('$date')
+FIELDS
+  Dual(Year($1), YearStart($1)) AS [Ano] Tagged ('$axis', '$year'),
+  Dual('T'&Num(Ceil(Num(Month($1))/3)),Num(Ceil(NUM(Month($1))/3),00)) AS [Trimestre] Tagged ('$quarter', '$cyclic'),
+  Dual(Year($1)&'-T'&Num(Ceil(Num(Month($1))/3)),QuarterStart($1)) AS [AnoTrimestre] Tagged ('$yearquarter', '$qualified'),
+  Dual('S'&Num(Ceil(Num(Month($1))/6)),Num(Ceil(NUM(Month($1))/6),00)) AS [Semestre] Tagged ('$half', '$cyclic'),
+  Dual(Year($1)&'-T'&Num(Ceil(Num(Month($1))/3)),QuarterStart($1)) AS [AnoSemestre] Tagged ('$yearhalf', '$qualified'),
+  Month($1) AS [Mês] Tagged ('$month', '$cyclic'),
+  Dual(Month($1)&'-'& Year($1), monthstart($1)) AS [Mês/Ano] Tagged ('$axis', '$yearmonth', '$qualified'),
+  Dual('W'&Num(Week($1),00), Num(Week($1),00)) AS [Semana] Tagged ('$weeknumber', '$cyclic'),
+  Date(Floor($1)) AS [Data] Tagged ('$axis', '$date', '$qualified'),
+  Day($1) AS [Dia] Tagged ('$day', '$numeric'),
+  Weekday($1) AS [DiaSemana] Tagged ('$day', '$text';
+
+DERIVE FIELDS FROM FIELDS [DATA_AGENDA], [OS_DATA], [DATA_CONTRATO], [DATA] USING [Cal] ;

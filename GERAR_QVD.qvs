@@ -1,0 +1,11 @@
+/* GERAR QVDs E REMOVER TABELAS CARREGADAS */
+
+FOR i = NoOfTables()-1 TO 0 STEP -1
+
+    LET V_NOME_TABELA = TableName($(i));
+
+    STORE $(V_NOME_TABELA) INTO $(V_PATH_QVD)/$(V_NOME_TABELA).qvd (qvd);
+
+    DROP TABLE $(V_NOME_TABELA);
+
+NEXT
